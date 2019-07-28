@@ -93,21 +93,22 @@ attachInterrupt() をより優先して使用する。
 参考として、attachInterrupt() で使用可能なピンを以下に示す。
 また PCINTをサポートしていない品種についても記す。
 
-| 品種 | 割込ピン | ハードウェアサポート | PCINT |
-|---|---|---|---|
-| ATmega 48/88/168/328 | 2, 3 | Arduino UNO/ProMini, MINICORE | 全ピン対応 |
-| ATmega 8| 2, 3 | MINICORE | 使用不可 |
-| ATmega 64/128 | 4, 5, 6, 7, 18, 19, 20, 21 | MEGACORE | 使用不可 |
-| ATmega 1281/2561 | 4, 5, 6, 7, 18, 19, 20, 21 | MEGACORE | 0, 8-15 |
-| ATmega 640/1280/2560 | 2, 3, 18, 19, 20, 21, 71, 72 | Arduino MEGA, MEGACORE (MEGA pinout) | 0, 10-15, 50-53, 61-69(A8-A15), 80-84 |
-| ATmega 640/1280/2560 | 4, 5, 6, 7, 34, 35, 36, 37 | MEGACORE (AVR pinout) | 0, 15-22, 52-58, 77-84(A8-A15) |
-| ATmega 164/324/644/1284 | 2, 10, 11 | MIGHTYCORE (STANDARD pinout) | 全ピン対応 |
-| ATmega 164/324/644/1284 | 2, 3, 6 | MIGHTYCORE (BOBUINO pinout) | 全ピン対応 |
-| ATmega 8535/16/32 | 2, 10, 11 | MIGHTYCORE (STANDARD pinout) | 使用不可 |
-| ATmega 8535/16/32 | 2, 3, 6 | MIGHTYCORE (BOBUINO pinout) | 使用不可 |
-| ATmega 162 | 10, 11, 32 | MAJORCORE | 16-31 |
-| ATmega 8515 | 10, 11, 32 | MAJORCORE | 使用不可 |
-| ATmega 32U2/32U4 | 0, 1, 2, 3, 7 | Arduino Leonard/ProMicro | 8, 9, 10, 11, 14, 15, 16, 17 |
+| 品種 | 標準割込ピン (INT0~) | PCINT0_vector (PCINT0-7) | PCINT1_vector (PCINT8-15) | PCINT2_vector (PCINT16-23) | PCINT3_vector (PCINT24-31) | ハードウェアサポート |
+|---|---|---|---|---|---|---|
+| ATmega 48 / 88 / 168 / 328 | 2, 3 | 8, 9, 10, 11, 12, 13, 20, 21 | 14(A0), 15(A1), 16(A2), 17(A3), 18(A4), 19(A5), 22 | 0, 1, 2, 3, 4, 5, 6, 7 | - | Arduino UNO / ProMini, MINICORE |
+| ATmega 88PB / 168PB / 328PB | 2, 3 | 8, 9, 10, 11, 12, 13, 20, 21 | 14(A0), 15(A1), 16(A2), 17(A3), 18(A4), 19(A5), 22 | 0, 1, 2, 3, 4, 5, 6, 7 | 23, 24, 25, 26 | MINICORE |
+| ATmega 8| 2, 3 | - | - | - | - | MINICORE |
+| ATmega 64 / 128 | 18, 19, 20, 21, 4, 5, 6, 7 | - | - | - | - | MEGACORE |
+| ATmega 1281 / 2561 | 18, 19, 20, 21, 4, 5, 6, 7 | 8, 9, 10, 11, 12, 13, 14, 15 | - | - | - | MEGACORE |
+| ATmega 640 / 1280 / 2560 | 21, 20, 19, 18, 3, 2, 71, 72 | 8, 9, 10, 11, 12, 13, 14, 15 | 0, 15, 14, 80, 81, 82, 83, 84 | 62(A8), 63(A9), 64(A10), 65(A11), 66(A12), 67(A13), 68(A14), 69(A15) | - | Arduino MEGA, MEGACORE (MEGA pinout) |
+| ATmega 640 / 1280 / 2560 | 34, 35, 36, 37, 4, 5, 6, 7 | 15, 16, 17, 18, 19, 20, 21 | 0, 52, 53, 54, 55, 56, 57, 58 | 77(A8), 78(A9), 79(A10), 80(A11), 81(A12), 82(A13), 83(A14), 84(A15) | - |  MEGACORE (AVR pinout) |
+| ATmega 164 / 324 / 644 / 1284 | 10, 11, 2 | 24(A0), 25(A1), 26(A2), 27(A3), 28(A4), 29(A5), 30(A6), 31(A7) | 0, 1, 2, 3, 4, 5, 6, 7 | 16, 17, 18, 19, 20, 21, 22, 23 | 8, 9, 10, 11, 12, 13, 14,  15 | MIGHTYCORE (STANDARD pinout) |
+| ATmega 164 / 324 / 644 / 1284 | 2, 3, 6 | ※逆順 21(A7), 20(A6), 19(A5), 18(A4), 17(A3), 16(A2), 15(A1), 14(A0) | 4, 5, 6, 7, 10, 11, 12, 13 | 22, 23, 24, 25, 26, 27, 28, 29 | 0, 1, 2, 3, 30, 8, 9, 31 | MIGHTYCORE (BOBUINO pinout) |
+| ATmega 8535 / 16 / 32 | 2, 10, 11 | - | - | - | - | MIGHTYCORE (STANDARD pinout) |
+| ATmega 8535 / 16 / 32 | 2, 3, 6 | - | - | - | - | MIGHTYCORE (BOBUINO pinout) |
+| ATmega 162 | 10, 11, 32 | 24, 25, 26, 27, 28, 29, 30, 31 | 16, 17, 18, 19, 20, 21, 22, 23 | - | - | MAJORCORE |
+| ATmega 8515 | 10, 11, 32 | - | - | - | - | MAJORCORE |
+| ATmega 32U2 / 32U4 | 3, 2, 1, 0 | 14, 13, 12, 11, 8, 9, 10 | - | - | - | Arduino Leonard / ProMicro |
 
 - 参考： https://github.com/MCUdude
 
@@ -122,7 +123,7 @@ if ( digitalPinToInterrupt( digitalPinNumber ) < EXTERNAL_NUM_INTERRUPTS ) {
 }
 ```
 
-PCINT が使えるピンは、以下のマクロと式で判定できる。
+PCINTn_vector が使えるピンは、以下のマクロと式で判定できる。
 ```c
 #include <avr/interrupt.h>
 if ( digitalPinToPCICR( digitalPinNumber ) ) {
@@ -130,7 +131,7 @@ if ( digitalPinToPCICR( digitalPinNumber ) ) {
 }
 ```
 
-さらに PCINTポートグループを知るには、以下のマクロが使用できる。
+さらにどの PCINTn_vector ポートグループ に属するか知るには、以下のマクロが使用できる。
 ```c
 #include <avr/interrupt.h>
 uint8_t portGroup = digitalPinToPCICRbit( digitalPinNumber ); // PCINT0 - PCINT3
