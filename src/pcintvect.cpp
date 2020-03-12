@@ -10,6 +10,7 @@
  */
 
 #ifndef SoftwareSerial_h
+#if defined(digitalPinToPCICRbit)
 #include <Arduino.h>
 #include "pcintvect.h"
 
@@ -54,6 +55,7 @@ void detachPCInterrupt (uint8_t interruptPin, bool removeAll) {
 		PCICR &= ~_BV(_pcint);
 	}
 }
+#endif
 #endif
 
 // end of code

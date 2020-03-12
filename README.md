@@ -12,6 +12,8 @@ PCINT 割り込みがすべて専有され、他の用途で自由に再定義�
 attachPCInterrupt() 関数で任意に割り当て、利用することが可能になっている。
 さらに可能であれば、attachInterrupt() を使用して PCINT を空けておくこともできる。
 
+- megaAVR-0系 tinyAVR-0/1/2系 では使用できない。
+
 ## Arduino IDE への導入
 
 1. .ZIPアーカイブをダウンロードする。[Click here](https://github.com/askn37/SoftUART/archive/master.zip)
@@ -207,9 +209,15 @@ ATmega1284 のような大容量 SRAM を有する品種では、1024 でも問�
 - 古い Arduino IDE には対応しない。1.8.5で動作確認。少なくとも C++11 は使えなければならない。
 - オリジナルの SoftwareSerial.h と共存できない。
 同様に PCInt Vecotr を排他的に使用するライブラリとは共存できない。
+- megaAVR-0系 tinyAVR-0/1/2系 では動作しない。
+割込の基本構造が異なり旧来の PCInt は存在しない。
+故に通常の SoftwareSerial で何ら問題はない。
 - 英文マニュアルが未整備である。
 
 ## 改版履歴
+
+- 0.1.1
+  - megaAVR/tinyAVR系選択時には無効化されるようにした。
 
 - 0.1
 

@@ -12,6 +12,7 @@
 #ifndef SoftwareSerial_h
 #ifndef __PCINTVECT_H
 #define __PCINTVECT_H
+#if defined(digitalPinToPCICRbit)
 
 #include <Arduino.h>
 
@@ -26,6 +27,9 @@ extern void detachPCInterrupt (uint8_t, bool = false);
 }
 #endif
 
+#endif
+#else
+#warning nosupported model; digitalPinToPCICRbit()
 #endif
 #endif
 
